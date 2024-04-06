@@ -198,7 +198,7 @@ def checker(card, month, year, cvv):
                     elapsed_time = time.time() - start_time
                 
                     MSegundos = round(elapsed_time, 2)
-                    
+                    time.sleep(1)
                     if 'Retry Transaction' in response.text:
                         code = response.json()['issuerResponseDetails']['issuerResponseCode']
                         bin = api_bin(card[:6])              
@@ -254,7 +254,7 @@ def checker(card, month, year, cvv):
             reteste(card, month, year, cvv)
 
 def processar_cartoes(card,mes,ano,cvv):
-    #time.sleep(5)
+    time.sleep(1)
     try:
         if len(card) == 16 or len(card) == 15 and mes and ano and cvv:
             retorno = checker(card,mes,ano,cvv)
