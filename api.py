@@ -254,7 +254,7 @@ def checker(card, month, year, cvv):
             reteste(card, month, year, cvv)
 
 def processar_cartoes(card,mes,ano,cvv):
-    time.sleep(5)
+    #time.sleep(5)
     try:
         if len(card) == 16 or len(card) == 15 and mes and ano and cvv:
             retorno = checker(card,mes,ano,cvv)
