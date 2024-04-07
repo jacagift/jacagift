@@ -95,7 +95,7 @@ def checker(card, month, year, cvv):
         
         
         try:
-            time.sleep(2)
+            time.sleep(4)
         
 
             p = {'https': 'http://brd-customer-hl_b12cf4ef-zone-privado:6f2jb118cxl2@brd.superproxy.io:22225', 'http':'http://brd-customer-hl_b12cf4ef-zone-privado:6f2jb118cxl2:gh5fkkxopi4c@brd.superproxy.io:22225'}
@@ -198,7 +198,7 @@ def checker(card, month, year, cvv):
                     elapsed_time = time.time() - start_time
                 
                     MSegundos = round(elapsed_time, 2)
-                    time.sleep(2)
+                    time.sleep(3)
                     if 'Retry Transaction' in response.text:
                         code = response.json()['issuerResponseDetails']['issuerResponseCode']
                         bin = api_bin(card[:6])              
