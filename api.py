@@ -245,17 +245,17 @@ def checker(card, month, year, cvv):
                     
         except requests.exceptions.ProxyError:
             print(Fore.LIGHTWHITE_EX + f"RETESTANDO PROXY: {card}|{month}|{year}|{cvv}")
-            reteste(card, month, year, cvv)
+            #reteste(card, month, year, cvv)
             
         except requests.exceptions.ConnectionError:
             print(Fore.LIGHTWHITE_EX + f"RETESTANDO ConnectionError: {card}|{month}|{year}|{cvv}")
-            reteste(card, month, year, cvv)
+            #reteste(card, month, year, cvv)
         except requests.exceptions.RequestException:
             print(Fore.LIGHTWHITE_EX + f"RETESTANDO RequestException: {card}|{month}|{year}|{cvv}")
-            reteste(card, month, year, cvv)
+            #reteste(card, month, year, cvv)
         except RequisicaoException:
             print(Fore.LIGHTWHITE_EX + f"RETESTANDO Location: {card}|{month}|{year}|{cvv}")
-            reteste(card, month, year, cvv)
+            #reteste(card, month, year, cvv)
             
             
 
@@ -268,8 +268,8 @@ def processar_cartoes(card,mes,ano,cvv):
         else:
             return {"code": "", "retorno": "erro no formulario"}
     except:
-        reteste(card, mes, ano, cvv)
-        return {"code": "", "retorno": "EXCEPTION ! CONTATE ADM SE PERSISTIR"}
+        retorno = checker(card,mes,ano,cvv)
+        return {"code": "", "retorno": retorno["mensagem"]}
     
     
 
