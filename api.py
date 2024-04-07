@@ -19,28 +19,29 @@ CORS(app)
 def pegarItem(data, esquerda, direita):
     return data.partition(esquerda)[-1].partition(direita)[0]
 
-# def criarTask():
-#     data = {
-#         "clientKey": "86f80f989d5d3d9f84ed15a70dcd8a39",
-#         "task": {
-#             "type": "RecaptchaV2EnterpriseTask",
-#             "websiteURL": "https://holdmyticket.com/api/shop/processors/logme2342311",
-#             "websiteKey": "6Lf7DLEZAAAAACWoTmGDsOAzTTwXshPMYKQMcrxK",
-#         },
-#     }
-#     criar = requests.post(
-#         "https://api.capmonster.cloud/createTask", verify=False, json=data
-#     )
-#     taskId = criar.json()["taskId"]
-#     while True:
-#         data = {"clientKey": "86f80f989d5d3d9f84ed15a70dcd8a39", "taskId": taskId}
-#         resultado = requests.post(
-#             "https://api.capmonster.cloud/getTaskResult", verify=False, json=data
-#         )
-#         #print(resultado.text)
-#         if '"status":"ready"' in resultado.text:
-#             return resultado.json()["solution"]["gRecaptchaResponse"]
-#         time.sleep(1)
+def criarTask():
+        data = {
+            "clientKey": "86f80f989d5d3d9f84ed15a70dcd8a39",
+            "task": {
+                "type": "RecaptchaV2EnterpriseTask",
+                "websiteURL": "https://holdmyticket.com/api/shop/processors/logme2342311",
+                "websiteKey": "6Lf7DLEZAAAAACWoTmGDsOAzTTwXshPMYKQMcrxK",
+            },
+        }
+        criar = requests.post(
+            "https://api.capmonster.cloud/createTask", verify=False, json=data
+        )
+        taskId = criar.json()["taskId"]
+        while True:
+            data = {"clientKey": "86f80f989d5d3d9f84ed15a70dcd8a39", "taskId": taskId}
+            resultado = requests.post(
+                "https://api.capmonster.cloud/getTaskResult", verify=False, json=data
+            )
+            #print(resultado.text)
+            if '"status":"ready"' in resultado.text:
+                return resultado.json()["solution"]["gRecaptchaResponse"]
+            time.sleep(1)
+
 
 def api_bin(bin):
     try:
@@ -267,31 +268,12 @@ def processar_cartoes(card,mes,ano,cvv):
         else:
             return {"code": "", "retorno": "erro no formulario"}
     except:
+        reteste(card, mes, ano, cvv)
         return {"code": "", "retorno": "EXCEPTION ! CONTATE ADM SE PERSISTIR"}
     
     
-def criarTask():
-        data = {
-            "clientKey": "86f80f989d5d3d9f84ed15a70dcd8a39",
-            "task": {
-                "type": "RecaptchaV2EnterpriseTask",
-                "websiteURL": "https://holdmyticket.com/api/shop/processors/logme2342311",
-                "websiteKey": "6Lf7DLEZAAAAACWoTmGDsOAzTTwXshPMYKQMcrxK",
-            },
-        }
-        criar = requests.post(
-            "https://api.capmonster.cloud/createTask", verify=False, json=data
-        )
-        taskId = criar.json()["taskId"]
-        while True:
-            data = {"clientKey": "86f80f989d5d3d9f84ed15a70dcd8a39", "taskId": taskId}
-            resultado = requests.post(
-                "https://api.capmonster.cloud/getTaskResult", verify=False, json=data
-            )
-            #print(resultado.text)
-            if '"status":"ready"' in resultado.text:
-                return resultado.json()["solution"]["gRecaptchaResponse"]
-            time.sleep(1)
+
+            
             
 @app.route('/', methods=['GET'])
 def iniciarChk():
