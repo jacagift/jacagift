@@ -95,7 +95,7 @@ def checker(card, month, year, cvv):
         
         
         try:
-            time.sleep(4)
+            time.sleep(1)
         
 
             p = {'https': 'http://brd-customer-hl_b12cf4ef-zone-privado:6f2jb118cxl2@brd.superproxy.io:22225', 'http':'http://brd-customer-hl_b12cf4ef-zone-privado:6f2jb118cxl2:gh5fkkxopi4c@brd.superproxy.io:22225'}
