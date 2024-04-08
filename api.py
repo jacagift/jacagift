@@ -201,7 +201,7 @@ def checker(card, month, year, cvv):
                 'accept-language': 'pt-PT,pt;q=0.9,en-US;q=0.8,en;q=0.7'
                 }
 
-                response = requests.request("POST", url, headers=headers, json=payload, verify=False, proxies=p, timeout=300)
+                response = requests.request("POST", url, headers=headers, json=payload, verify=False, proxies=p)
                 elapsed_time = time.time() - start_time
                 print(response.text)
                 MSegundos = round(elapsed_time, 2)
