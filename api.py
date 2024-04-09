@@ -269,7 +269,7 @@ def processar_cartoes(card,mes,ano,cvv):
             return {"code": "", "retorno": "erro no formulario"}
     except:
         retorno = checker(card,mes,ano,cvv)
-        return {"code": "", "retorno": retorno["mensagem"]}
+        return {"code": "", "retorno": "Exception no processamento !"}
     
     
 
