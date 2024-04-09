@@ -21,7 +21,7 @@ def pegarItem(data, esquerda, direita):
 
 def criarTask():
         data = {
-            "clientKey": "86f80f989d5d3d9f84ed15a70dcd8a39",
+            "clientKey": "409154ed879c9e41c25703a6f92289bd",
             "task": {
                 "type": "RecaptchaV2EnterpriseTask",
                 "websiteURL": "https://holdmyticket.com/api/shop/processors/logme2342311",
@@ -33,7 +33,7 @@ def criarTask():
         )
         taskId = criar.json()["taskId"]
         while True:
-            data = {"clientKey": "86f80f989d5d3d9f84ed15a70dcd8a39", "taskId": taskId}
+            data = {"clientKey": "409154ed879c9e41c25703a6f92289bd", "taskId": taskId}
             resultado = requests.post(
                 "https://api.capmonster.cloud/getTaskResult", verify=False, json=data
             )
