@@ -133,41 +133,9 @@ def checker(card, month, year, cvv):
             company = pegarItem(response.text, '"username":"','"')
             tel = random.randint(00000,99999)
             
-            if response.status_code == 200:
+   
           
-                    
-            start_time = time.time()  
-            url = "https://randomuser.me/api?results=1&gender=&password=upper,lower,12&exc=register,picture,id&nat=US"
-            headers = {
-                    'Host': 'randomuser.me',
-                    'sec-ch-ua': '"Chromium";v="118", "Google Chrome";v="118", "Not=A?Brand";v="99"',
-                    'accept': 'application/json, text/plain, */*',
-                    'sec-ch-ua-mobile': '?0',
-                    'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/118.0.0.0 Safari/537.36',
-                    'sec-ch-ua-platform': '"Windows"',
-                    'origin': 'https://namso-gen.com',
-                    'sec-fetch-site': 'cross-site',
-                    'sec-fetch-mode': 'cors',
-                    'sec-fetch-dest': 'empty',
-                    'referer': 'https://namso-gen.com/',
-                    'accept-language': 'pt-PT,pt;q=0.9,en-US;q=0.8,en;q=0.7'
-                    }
 
-            response = requests.get( url, headers=headers, verify=False)
-            email = pegarItem(response.text, '"email":"','"')
-            nome = pegarItem(response.text, '"first":"','"')
-            sobrenome = pegarItem(response.text, '"last":"','"')
-            street = pegarItem(response.text, '"name":"','"},"city"')
-            snumber = pegarItem(response.text, '"street":{"number":',',')
-            city = pegarItem(response.text, '"city":"','"')
-            state = pegarItem(response.text, '"state":"','"')
-            state = state[0:2]
-            postcode = pegarItem(response.text, '"postcode":',',')
-            company = pegarItem(response.text, '"username":"','"')
-            tel = random.randint(1111,9999)
-            tel2 = random.randint(111,999)
-            tel3 = random.randint(111,999)
-            time.sleep(2)
             
             if response.status_code == 200:
                 time.sleep(5)
