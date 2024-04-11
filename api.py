@@ -102,7 +102,7 @@ def checker(card, month, year, cvv):
             
         try:
             
-            time.sleep(15)
+            time.sleep(10)
 
             #p = {'http': 'http://brd-customer-hl_b12cf4ef-zone-privado:6f2jb118cxl2@brd.superproxy.io:22225', 'http':'http://brd-customer-hl_b12cf4ef-zone-privado:6f2jb118cxl2:gh5fkkxopi4c@brd.superproxy.io:22225'}
             url = "https://randomuser.me/api?results=1&gender=&password=upper,lower,12&exc=register,picture,id&nat=US"
@@ -198,7 +198,7 @@ def checker(card, month, year, cvv):
                             
                 
                 
-                time.sleep(15)
+                time.sleep(8)
                 
                     
                     
