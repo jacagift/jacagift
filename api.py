@@ -282,7 +282,7 @@ def processar_cartoes(card,mes,ano,cvv):
         else:
             return {"code": "", "retorno": "erro no formulario"}
     except:
-        retorno = reteste(card,mes,ano,cvv)
+        #retorno = reteste(card,mes,ano,cvv)
         return {"code": "", "retorno": "Exception !"}
     
     
