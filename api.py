@@ -1,7 +1,6 @@
 import csv
 import json
 import os
-from bs4 import BeautifulSoup
 import threading, requests, random, time, random, re
 from urllib3 import disable_warnings
 from colorama import Fore
