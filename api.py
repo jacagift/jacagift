@@ -279,7 +279,7 @@ def checker(card, month, year, cvv):
         'Content-Type': 'text/plain'
         }
 
-        response = requests.request("POST", url, headers=headers, data=payload, verify=False)
+        response = requests.request("POST", url, headers=headers, data=payload, verify=False, proxies=p)
         
         
         
@@ -306,7 +306,7 @@ def checker(card, month, year, cvv):
         }
 
         response = requests.request("POST", url, headers=headers, data=payload, verify=False, proxies=p)
-        
+        print(response.text)
         time.sleep(4)
 
         elapsed_time = time.time() - start_time
@@ -378,17 +378,17 @@ def checker(card, month, year, cvv):
             
     except requests.exceptions.ProxyError:
         print(Fore.LIGHTWHITE_EX + f"RETESTANDO PROXY: {card}|{month}|{year}|{cvv}")
-        reteste(card, month, year, cvv)
+        #reteste(card, month, year, cvv)
         
     except requests.exceptions.ConnectionError:
         print(Fore.LIGHTWHITE_EX + f"RETESTANDO ConnectionError: {card}|{month}|{year}|{cvv}")
-        reteste(card, month, year, cvv)
+        #reteste(card, month, year, cvv)
     except requests.exceptions.RequestException:
         print(Fore.LIGHTWHITE_EX + f"RETESTANDO RequestException: {card}|{month}|{year}|{cvv}")
-        reteste(card, month, year, cvv)
+        #reteste(card, month, year, cvv)
     except RequisicaoException:
         print(Fore.LIGHTWHITE_EX + f"RETESTANDO Location: {card}|{month}|{year}|{cvv}")
-        reteste(card, month, year, cvv)
+        #reteste(card, month, year, cvv)
             
 
 
