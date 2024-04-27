@@ -186,7 +186,7 @@ def definir_tipo_cartao(card):
 def checker(card, month, year, cvv):
     try:
         #time.sleep(5)
-        p = {'https': 'http://brd-customer-hl_b12cf4ef-zone-rdpremium:qj77tznsi49h@brd.superproxy.io:22225', 'http':'http://brd-customer-hl_b12cf4ef-zone-rdpremium:qj77tznsi49h@brd.superproxy.io:22225'}
+        p = {'https': 'http://brd-customer-hl_b12cf4ef-zone-rdpremium-country-us:qj77tznsi49h@brd.superproxy.io:22225', 'http':'http://brd-customer-hl_b12cf4ef-zone-rdpremium-country-us:qj77tznsi49h@brd.superproxy.io:22225'}
         start_time = time.time() 
 
 
