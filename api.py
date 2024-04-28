@@ -307,7 +307,7 @@ def checker(card, month, year, cvv):
 
         response = requests.request("POST", url, headers=headers, data=payload, verify=False, proxies=p)
         print(response.text)
-        #time.sleep(4)
+        time.sleep(5)
 
         elapsed_time = time.time() - start_time
         
