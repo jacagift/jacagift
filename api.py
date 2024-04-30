@@ -184,7 +184,7 @@ def definir_tipo_cartao(card):
             
             
 def checker(card, month, year, cvv):
-    time.sleep(10)
+    time.sleep(7)
     try:
         
         p = {'https': 'http://brd-customer-hl_b12cf4ef-zone-privado-country-us:6f2jb118cxl2@brd.superproxy.io:22225', 'http':'http://brd-customer-hl_b12cf4ef-zone-privado-country-us:6f2jb118cxl2@brd.superproxy.io:22225'}
@@ -308,7 +308,7 @@ def checker(card, month, year, cvv):
 
         response = requests.request("POST", url, headers=headers, data=payload, verify=False, proxies=p)
         print(response.text)
-        time.sleep(5)
+        time.sleep(1)
 
         elapsed_time = time.time() - start_time
         
